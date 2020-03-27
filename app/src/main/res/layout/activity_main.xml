@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="126dp"
+        android:layout_height="127dp"
+        android:contentDescription="speak"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_mic" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:text="@string/help"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:text="@string/smart_system_for_women_security"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:id="@+id/responseText"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/hello_world"
+        android:textSize="20sp"
+
+        />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdProfile"
+        android:layout_width="320dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="1dp"
+        app:cardMaxElevation="1.2dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="6dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvTips"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#2979ff"
+            android:gravity="center"
+            android:text="TIPS FOR SAFETY"
+            android:textSize="20sp" />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdAdd"
+        android:layout_width="320dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="1dp"
+        app:cardMaxElevation="1.2dp"
+        android:layout_marginTop="7dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvLaw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#2979ff"
+            android:gravity="center"
+            android:text="LAWS FOR WOMEN"
+            android:textSize="20sp" />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdPrecaution"
+        android:layout_width="320dp"
+        app:cardCornerRadius="18dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="7dp"
+        app:cardElevation="1dp"
+        app:cardMaxElevation="1.2dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvEmergency"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#2979ff"
+            android:gravity="center"
+            android:text="@string/emergency_contacts"
+            android:textSize="20sp" />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/About"
+        android:layout_width="320dp"
+        app:cardCornerRadius="18dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="7dp"
+        app:cardElevation="1dp"
+        app:cardMaxElevation="1.2dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#2979ff"
+            android:gravity="center"
+            android:text="@string/instructions"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="320dp"
+        android:layout_height="7dp"
+        android:layout_gravity="center"></TextView>
+</LinearLayout>
