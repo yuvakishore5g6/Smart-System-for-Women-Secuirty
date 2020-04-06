@@ -1,11 +1,17 @@
 package com.example.ss_ws;
 
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -15,34 +21,39 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.telephony.SmsManager;
 import android.util.Log;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-
+import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity {
     public static final String MY_PREFERENCES = "com.example.ss_ws.Values";
     private static final String TAG = MainActivity.class.getName();
-    private static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+    private int CONST_PERMISSION = 1;
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
     private SpeechRecognizer mSpeechRecognizer;
     TextView responseText;
     private Handler mHandler = new Handler();
     Intent mSpeechIntent;
     double latitude, longitude;
+    String[] appPermissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.SEND_SMS,Manifest.permission.CALL_PHONE};
     boolean killCommanded = false;
     LocationManager locationManager;
     LocationListener listener;
@@ -53,6 +64,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = findViewById(R.id.toolbar);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        responseText =findViewById(R.id.responseText);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        navigationView.setNavigationItemSelectedListener(MainActivity.this);
         tips = findViewById(R.id.tvTips);
         laws = findViewById(R.id.tvLaw);
         emergency = findViewById(R.id.tvEmergency);
@@ -85,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         responseText =findViewById(R.id.responseText);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         listener = new LocationListener() {
@@ -101,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 SmsManager sms = SmsManager.getDefault();
                 sms.sendTextMessage(number, null, loc1, null, null);
                 Toast.makeText(MainActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -122,28 +142,100 @@ public class MainActivity extends AppCompatActivity {
 
         };
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
-            if ((ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.RECORD_AUDIO) &&
-                    ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-            && ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS) &&
-                    ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CALL_PHONE))) {
-            }
-            else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.SEND_SMS,Manifest.permission.CALL_PHONE}, MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
-
-            }
-        } else {
-
+        if (checkAndRequestPermission()) {
+            voice();
         }
-        voice();
     }
 
+    private boolean checkAndRequestPermission() {
+        List<String> listPermissionNeeded = new ArrayList<>();
+        for (String per : appPermissions) {
+            //check which permissions are granted
+            if (ContextCompat.checkSelfPermission(this, per) != PackageManager.PERMISSION_GRANTED) {
+                listPermissionNeeded.add(per);
+            }
+        }
+        //Ask for non-granted permissions
+        if (!listPermissionNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionNeeded.toArray(new String[listPermissionNeeded.size()]), CONST_PERMISSION);
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        int deniedCount = 0;
+        HashMap<String, Integer> permissionResults = new HashMap<>();
+        if (requestCode == CONST_PERMISSION) {
 
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    permissionResults.put(permissions[i], grantResults[i]);
+                    deniedCount++;
+                }
+            }
+        }
+        if (deniedCount == 0) {
+
+        } else {
+            for (Map.Entry<String, Integer> entry : permissionResults.entrySet()) {
+                String perName = entry.getKey();
+                Integer permResult = entry.getValue();
+                //permission is denied for first time(when Never ask again is not checked)
+                //so ask explaining the usage of permission
+                //shouldShowRequestPermissionRationale() returns ture;
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, perName)) {
+                    showDialog("", " This app needs location permission to work with out problems ", "Yes,Grant permissions",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    checkAndRequestPermission();
+                                }
+                            },
+                            "No exit app", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    finish();
+                                }
+                            }, false);
+                } else {
+                    showDialog("", "You have denied some permissions,Allow all permissions at [setting] > [Permission]", "Go to settings",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", getPackageName(), null));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }, "No Exit app", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    finish();
+                                }
+                            }, false);
+                    break;
+                }
+            }
+        }
+    }
+
+    public AlertDialog showDialog(String title, String message, String positiveText, DialogInterface.OnClickListener positiveonClickListener, String negativeText, DialogInterface.OnClickListener negativeonClickListener, boolean isCancelAble) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setCancelable(isCancelAble);
+        builder.setMessage(message);
+        builder.setPositiveButton(positiveText,positiveonClickListener);
+        builder.setNegativeButton(negativeText,negativeonClickListener);
+        AlertDialog alert = builder.create();
+        alert.show();
+        return alert;
+
+    }
     public void voice() {
         mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.this);
         SpeechListener mRecognitionListener = new SpeechListener();
@@ -179,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawer_menu, menu);
+        inflater.inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -215,25 +307,23 @@ public class MainActivity extends AppCompatActivity {
         String response = "I'm sorry, Yuvakishore. I'm afraid I can't do that.";
         String result_message = matchStrings.get(0);
         result_message = result_message.toLowerCase();
-        if(result_message.indexOf("who") != -1){
-            if(result_message.indexOf("are you") != -1){
+        if(result_message.contains("who")){
+            if(result_message.contains("are you")){
                 response="Smart system for your security";
             }
-            if (result_message.indexOf("hello") != -1){
+            if (result_message.contains("hello")){
                 response = "Hello techie nice to meet you...!";
 
             }
-        } else if (result_message.indexOf("help") != -1){
+        } else if (result_message.contains("help")){
             clickmeforloc();
             call();
             response = "Smart security system is online";
 
         }
-        else if (result_message.indexOf("exit") != -1){
+        else if (result_message.contains("exit")){
             killCommanded = true;
         }
-
-
         final String finalResponse = response;
         mHandler.post(new Runnable() {
             public void run() {
@@ -263,7 +353,48 @@ public class MainActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0, listener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 60000, 0, listener);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        if(id == R.id.home)
+        {
+
+        }
+        if(id == R.id.add_contacts)
+        {
+            Intent intent = new Intent(this,Addcontacts.class);
+            startActivity(intent);
+        }
+        if(id == R.id.profile)
+        {
+            Intent intent = new Intent(this,ActualProfile.class);
+            startActivity(intent);
+        }
+        if(id == R.id.message)
+        {
+            Intent intent = new Intent(this,MessageActivity.class);
+            startActivity(intent);
+        }
+        if(id == R.id.share)
+        {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            String shareSubText = "SS_WS Great App";
+            String shareBodyText = "https://play.google.com/store/apps/details?id=com.ss-ws&hl=en";
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubText);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBodyText);
+            startActivity(Intent.createChooser(shareIntent, "Share With"));
+        }
+        if(id == R.id.rate)
+        {
+            Intent intent = new Intent(this,RatingActivity.class);
+            startActivity(intent);
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     class SpeechListener implements RecognitionListener {
@@ -299,8 +430,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "results are " + matches.toString());
                     final ArrayList<String> matchesStrings = matches;
                     processCommand(matchesStrings);
-                    if(!killCommanded)
+                    if(!killCommanded) {
                         mSpeechRecognizer.startListening(mSpeechIntent);
+                        mSpeechRecognizer.stopListening();
+                    }
                     else
                         finish();
                 }
@@ -317,5 +450,5 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "speech done");
         }
 
-    };
+    }
 }

@@ -1,10 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="nav_view"
+    >
 
->
-
-        <item
-            android:id="@+id/volunteer"
-            android:title="@string/volunteer" />
-
+        <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/home"
+                    android:title="@string/home"
+                    android:icon="@drawable/ic_home"
+                    ></item>
+                <item
+                    android:id="@+id/add_contacts"
+                    android:title="@string/add_contacts"
+                    android:icon="@drawable/ic_add"></item>
+                <item
+                    android:id="@+id/profile"
+                    android:title="@string/profile"
+                    android:icon="@drawable/ic_account"
+                    ></item>
+                <item
+                    android:id="@+id/message"
+                    android:title="@string/message"
+                    android:icon="@drawable/ic_message"
+                    ></item>
+        </group>
+        <item android:title="@string/communicate">
+                <menu>
+                        <item
+                            android:id="@+id/share"
+                            android:icon="@drawable/ic_share"
+                            android:title="@string/share" />
+                        <item
+                            android:id="@+id/rate"
+                            android:icon="@drawable/ic_rate"
+                            android:title="@string/rate_our_app" />
+                </menu>
+        </item>
 </menu>

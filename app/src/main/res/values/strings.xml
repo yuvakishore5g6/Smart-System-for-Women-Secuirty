@@ -21,32 +21,35 @@
     <string name="rate_our_app">Rate our app</string>
     <string name="smart">Smart System for Women Security</string>
     <string name="ss_ws">SS-WS</string>
-    <string name="home">Home</string>
     <string name="speak">speak</string>
     <string name="tips_for_safety">TIPS FOR SAFETY</string>
     <string name="laws_for_women">LAWS FOR WOMEN</string>
     <string name="volunteer">Volunteer</string>
-    <string name="abc">1. The Sexual Harassment of Women at Workplace (PREVENTION, PROHIBITION and REDRESSAL) Act, 2013</string>
-    <string name="efg">2. The Criminal Law (Amendment) Act, 2013</string>
-    <string name="ghi">3. The Immoral Traffic (Prevention) Act, 1956</string>
-    <string name="xyz">4. The Indecent Representation of Women (Prohibition) Act, 1986</string>
-    <string name="national">NATIONAL EMERGENCY NUMBER:112</string>
-    <string name="police">POLICE:100</string>
-    <string name="fire">FIRE:101</string>
-    <string name="helpline">Women Helpline:1091</string>
-    <string name="domestic">Women Helpline - (Domestic Abuse):181</string>
-    <string name="practice_awareness">PRACTICE AWARENESS</string>
-    <string name="use_your_sixth_sense">USE YOUR SIXTH SENSE</string>
-    <string name="take_self_defense_training">TAKE SELF-DEFENSE TRAINING.</string>
-    <string name="escape_is_always_your_best_option">ESCAPE IS ALWAYS YOUR BEST OPTION</string>
-    <string name="you_have_a_right_to_fight">YOU HAVE A RIGHT TO FIGHT</string>
-    <string name="pepper_spray_is_not_your_secret_weapon">PEPPER SPRAY IS NOT YOUR SECRET WEAPON</string>
-    <string name="safeguard_against_home_invasions">SAFEGUARD AGAINST HOME INVASIONS</string>
-    <string name="be_prepared_when_you_travel">BE PREPARED WHEN YOU TRAVEL</string>
-    <string name="use_the_internet_wisely">USE THE INTERNET WISELY</string>
+    <string name="abc">\n The Sexual Harassment of Women at Workplace (PREVENTION, PROHIBITION and REDRESSAL) Act, 2013 \n\n The Criminal Law (Amendment) Act, 2013 \n\n The Immoral Traffic (Prevention) Act, 1956
+       \n\n The Indecent Representation of Women (Prohibition) Act, 1986 \n\n </string>
+    <string name="national">\n NATIONAL EMERGENCY NUMBER : 112 \n\n POLICE : 100 \n\n FIRE : 101 \n\n Women Helpline : 1091 \n\n Women Helpline - (Domestic Abuse) : 181</string>
+    <string name="practice_awareness">\n PRACTICE AWARENESS \n\n USE YOUR SIXTH SENSE \n\n TAKE SELF-DEFENSE TRAINING. \n\n YOU HAVE A RIGHT TO FIGHT
+    \n\n SAFEGUARD AGAINST HOME INVASIONS \n\n BE PREPARED WHEN YOU TRAVEL\n\n USE THE INTERNET WISELY</string>
     <string name="vol">VOLUNTEER</string>
     <string name="raise_complaint">Raise complaint</string>
     <string name="ambulance">Ambulance</string>
     <string name="qhelp">HELP</string>
     <string name="exit">EXIT</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="submit">Submit</string>
+    <string name="text_in_volunteer">\t 1.You are a <b>Volunteer</b>. \n\t 2.You can <b>HELP!</b> others by clicking the above buttons. \n
+    \t 3.<b>HELP! </b>: Makes a siren sound, to help one in the situation. \n\t 3.<b>Raise complaint : </b> will make a call to nearest police station \n \t 4.<b>Ambulance : </b> will make a call to ambulance \n</string>
+    <string name="working">We all are working to serve you better</string>
+    <string name="thank">Thank you for rating us</string>
+    <string name="send">SEND</string>
+    <string name="mobile_number">Enter a valid mobile number</string>
+
+    <string name="Meass">Message</string>
+    <string name="enter_a_message">Enter a message.....</string>
+    <string name="rate_myapp">Rate our App</string>
+    <string name="home">Home</string>
+    <string name="add_contacts">Add contacts</string>
+
+
 </resources>

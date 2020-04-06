@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/drawerLayout"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     >
-
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        app:title="SS-WS"
+        app:titleTextColor="@color/white"
+        android:elevation="3dp"
+        android:background="@drawable/toolbar_style"
+        android:layout_margin="4dp"
+        ></androidx.appcompat.widget.Toolbar>
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="126dp"
         android:layout_height="127dp"
-        android:contentDescription="speak"
+        android:contentDescription="@string/speak"
         android:layout_gravity="center"
         app:srcCompat="@drawable/ic_mic" />
 
@@ -67,7 +79,7 @@
             android:fontFamily="sans-serif-black"
             android:textColor="#2979ff"
             android:gravity="center"
-            android:text="TIPS FOR SAFETY"
+            android:text="@string/tips_for_safety"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
@@ -88,7 +100,7 @@
             android:fontFamily="sans-serif-black"
             android:textColor="#2979ff"
             android:gravity="center"
-            android:text="LAWS FOR WOMEN"
+            android:text="@string/laws_for_women"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
@@ -139,3 +151,14 @@
         android:layout_height="7dp"
         android:layout_gravity="center"></TextView>
 </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/drawer_menu"
+        >
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

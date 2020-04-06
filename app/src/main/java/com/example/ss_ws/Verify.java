@@ -37,11 +37,15 @@ public class Verify extends AppCompatActivity {
                     Log.d(TAG, "onClick: valid");
                     progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(Verify.this,"Verified Successfully",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Verify.this,Profile.class);
+                    Intent intent = new Intent(getApplicationContext(),Profile.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
+                    finish();
                 }
                 else {
                     Log.d(TAG, "onClick: INVALID");
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(Verify.this,"Invalid PIN",Toast.LENGTH_SHORT).show();
                 }
 

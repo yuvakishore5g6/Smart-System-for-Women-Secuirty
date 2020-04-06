@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".RatingActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rate_myapp"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/tool"
+        android:fontFamily="monospace"
+        ></TextView>
+<RatingBar
+    android:id="@+id/ratingBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:numStars="5"
+    android:stepSize="0.5"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/rateBut"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@color/primary"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>

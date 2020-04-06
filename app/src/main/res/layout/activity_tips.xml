@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,64 +10,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:padding="10dp"
         android:text="@string/practice_awareness"
         android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/use_your_sixth_sense"
-        android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/take_self_defense_training"
-        android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/escape_is_always_your_best_option"
-        android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/you_have_a_right_to_fight"
-        android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/pepper_spray_is_not_your_secret_weapon"
-        android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/safeguard_against_home_invasions"
-        android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/be_prepared_when_you_travel"
-        android:fontFamily="sans-serif-black"></TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:text="@string/use_the_internet_wisely"
-        android:fontFamily="sans-serif-black"></TextView>
+
 </LinearLayout>
