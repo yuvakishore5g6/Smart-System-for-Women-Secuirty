@@ -15,7 +15,7 @@ import android.widget.Toast;
 import static com.example.ss_ws.Login.MY_PREFERENCES;
 import static java.lang.Boolean.TRUE;
 
-public class ActualProfile extends AppCompatActivity {
+public class ActualProfile extends AppCompatActivity  {
 
     EditText address_act,contact1_act,contact2_act,name_act,mobile_act;
 
@@ -70,7 +70,9 @@ public class ActualProfile extends AppCompatActivity {
     private void setData() {
         SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES,MODE_PRIVATE);
         nameACTFill = preferences.getString("userName","");
-        xyz = "Hello, "+nameACTFill.toUpperCase();
+        if (nameACTFill != null) {
+            xyz = "Hello, "+nameACTFill.toUpperCase();
+        }
         textView.setText(xyz);
         name_act.setText(nameACTFill);
         name_act.setEnabled(false);
@@ -158,4 +160,6 @@ public class ActualProfile extends AppCompatActivity {
             Toast.makeText(this,"Profile updated successfully",Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

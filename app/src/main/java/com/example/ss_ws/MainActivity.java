@@ -13,8 +13,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -31,19 +34,37 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String MY_PREFERENCES = "com.example.ss_ws.Values";
     private static final String TAG = MainActivity.class.getName();
+    private static final String MY_PREFERENCES = "com.example.ss_ws.Values";
     private int CONST_PERMISSION = 1;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -51,12 +72,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SpeechRecognizer mSpeechRecognizer;
     TextView responseText;
     private Handler mHandler = new Handler();
+    ImageView imageView;
     Intent mSpeechIntent;
+    String Username="";
     double latitude, longitude;
-    String[] appPermissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.SEND_SMS,Manifest.permission.CALL_PHONE};
+    String[] appPermissions = {Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.SEND_SMS,Manifest.permission.CALL_PHONE};
     boolean killCommanded = false;
     LocationManager locationManager;
     LocationListener listener;
+    private static final int LOCATION_SETTINGS_REQUEST = 123;
+    HashSet<String> hSet = new HashSet<>();
     TextView tips,laws,emergency,instructions;
 
 
@@ -70,11 +95,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar, R.string.open, R.string.close);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(MainActivity.this);
+        SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES,MODE_PRIVATE);
+        Username = preferences.getString("userName", "");
+        imageView = findViewById(R.id.imageView);
         tips = findViewById(R.id.tvTips);
         laws = findViewById(R.id.tvLaw);
         emergency = findViewById(R.id.tvEmergency);
@@ -107,22 +135,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickmeforloc();
+                call();
+            }
+        });
         responseText =findViewById(R.id.responseText);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                String loc1 = "";
                 SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-                String name = preferences.getString("userName", "");
-                String number = preferences.getString("contact1", "");
+                Username = preferences.getString("userName", "");
                 latitude = location.getLatitude();
+//                String add="";
                 longitude = location.getLongitude();
-                loc1 = name+" need HELP " + "http://maps.google.com/maps?q=" + latitude + "," + longitude;
-                SmsManager sms = SmsManager.getDefault();
-                sms.sendTextMessage(number, null, loc1, null, null);
-                Toast.makeText(MainActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
+//                geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+
+//                try {
+//                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
+//                    String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+//                    String city = addresses.get(0).getLocality();
+//                    String state = addresses.get(0).getAdminArea();
+//                    String country = addresses.get(0).getCountryName();
+//                    String postalCode = addresses.get(0).getPostalCode();
+//                    add = address + "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode;
+//                    Toast.makeText(MainActivity.this,"Loc from GEo",Toast.LENGTH_SHORT).show();
+//
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+                sms(latitude, longitude, Username);
             }
+
 
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
@@ -136,16 +184,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onProviderDisabled(String s) {
-                Toast.makeText(MainActivity.this, "Enable Gps", Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this, "Enable Gps", Toast.LENGTH_LONG).show();
+                getloc();
 
             }
 
         };
 
         if (checkAndRequestPermission()) {
+            getloc();
             voice();
+
         }
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
+
+
+
+
+    private void sms(double latitude, double longitude, String username){
+        SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES,MODE_PRIVATE);
+        String number1 = preferences.getString("contact1","");
+        String number2 = preferences.getString("contact2","");
+        boolean set = preferences.getBoolean("set", false);
+        if (set) {
+            hSet = (HashSet<String>) preferences.getStringSet("phone_set", Collections.singleton(""));
+        }
+        String pin = "Message from Smart System for Women Security\n"+"need HELP! pick from below location\n" + "http://maps.google.com/maps?q=" + latitude + "," + longitude;
+//        String loc1 = pin+"\n"+add;
+        String loc1 = pin;
+        Iterator it = hSet.iterator();
+        if(hSet.size() > 0)
+        {
+            while(it.hasNext())
+            {
+                String number = it.next().toString().trim();
+                SmsManager sms = SmsManager.getDefault();
+                sms.sendTextMessage(number, null, loc1, null, null);
+                Toast.makeText(MainActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            SmsManager sms = SmsManager.getDefault();
+            sms.sendTextMessage(number1, null, loc1, null, null);
+            sms.sendTextMessage(number2, null, loc1, null, null);
+            Toast.makeText(MainActivity.this,"Messages Sent to Primary and secondary contacts",Toast.LENGTH_SHORT).show();
+           
+        }
+        Toast.makeText(MainActivity.this, "Messages sent", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
 
     private boolean checkAndRequestPermission() {
         List<String> listPermissionNeeded = new ArrayList<>();
@@ -160,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ActivityCompat.requestPermissions(this, listPermissionNeeded.toArray(new String[listPermissionNeeded.size()]), CONST_PERMISSION);
             return false;
         }
+        else
+            voice();
         return true;
     }
     @Override
@@ -180,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             for (Map.Entry<String, Integer> entry : permissionResults.entrySet()) {
                 String perName = entry.getKey();
-                Integer permResult = entry.getValue();
+
                 //permission is denied for first time(when Never ask again is not checked)
                 //so ask explaining the usage of permission
                 //shouldShowRequestPermissionRationale() returns ture;
@@ -236,6 +329,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return alert;
 
     }
+
+
+
+
+
     public void voice() {
         mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.this);
         SpeechListener mRecognitionListener = new SpeechListener();
@@ -304,7 +402,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void processCommand(ArrayList<String> matchStrings){
-        String response = "I'm sorry, Yuvakishore. I'm afraid I can't do that.";
+        String response = "I'm sorry,"+Username+". I'm afraid I can't do that.";
         String result_message = matchStrings.get(0);
         result_message = result_message.toLowerCase();
         if(result_message.contains("who")){
@@ -321,6 +419,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             response = "Smart security system is online";
 
         }
+        else if(result_message.contains("stop"))
+        {
+            mSpeechRecognizer.stopListening();
+            mSpeechRecognizer.cancel();
+            mSpeechRecognizer.destroy();
+        }
         else if (result_message.contains("exit")){
             killCommanded = true;
         }
@@ -331,6 +435,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+    }
+    private void getloc() {
+        LocationRequest mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(20 * 1000)
+                .setFastestInterval(1 * 1000);
+
+        LocationSettingsRequest.Builder settingsBuilder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(mLocationRequest);
+        settingsBuilder.setAlwaysShow(true);
+
+        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(this)
+                .checkLocationSettings(settingsBuilder.build());
+//        Toast.makeText(MainActivity.this,"LOCation"+mLocationRequest,Toast.LENGTH_LONG).show();
+        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+                try {
+                    LocationSettingsResponse response =
+                            task.getResult(ApiException.class);
+                } catch (ApiException ex) {
+                    switch (ex.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            try {
+                                ResolvableApiException resolvableApiException =
+                                        (ResolvableApiException) ex;
+                                resolvableApiException
+                                        .startResolutionForResult(MainActivity.this,
+                                                LOCATION_SETTINGS_REQUEST);
+                            } catch (IntentSender.SendIntentException e) {
+
+                            }
+                            break;
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            Toast.makeText(MainActivity.this,"Not Permitted Try again",Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            }
+
+
+        });
     }
     private void call() {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -423,7 +569,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         public void onResults(Bundle results) {
             Log.d(TAG, "on results");
-            ArrayList<String> matches = null;
+            ArrayList<String> matches;
             if(results != null){
                 matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if(matches != null){
@@ -432,7 +578,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     processCommand(matchesStrings);
                     if(!killCommanded) {
                         mSpeechRecognizer.startListening(mSpeechIntent);
-                        mSpeechRecognizer.stopListening();
                     }
                     else
                         finish();

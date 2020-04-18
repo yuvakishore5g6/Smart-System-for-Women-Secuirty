@@ -23,6 +23,7 @@
         android:background="@drawable/toolbar_style"
         android:layout_margin="4dp"
         />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="126dp"
@@ -163,6 +164,8 @@
         android:textColor="@color/dark"
 
         android:gravity="center"/>
+
+
 </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

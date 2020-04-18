@@ -27,7 +27,7 @@
     <string name="volunteer">Volunteer</string>
     <string name="abc">\n The Sexual Harassment of Women at Workplace (PREVENTION, PROHIBITION and REDRESSAL) Act, 2013 \n\n The Criminal Law (Amendment) Act, 2013 \n\n The Immoral Traffic (Prevention) Act, 1956
        \n\n The Indecent Representation of Women (Prohibition) Act, 1986 \n\n </string>
-    <string name="national">\n NATIONAL EMERGENCY NUMBER : 112 \n\n POLICE : 100 \n\n FIRE : 101 \n\n Women Helpline : 1091 \n\n Women Helpline - (Domestic Abuse) : 181</string>
+    <string name="national">  Women Helpline : 118 \n\nNational Emergency : 112 \n\nRoad Accident : 1073 \n\nPolice : 100 \n\nFire : 101 \n\nChild Helpline : 1098 \n\nWomen Helpline (Domestic Abuse) : 181 \n\nLegal Assistance / Legal Aid : 15100</string>
     <string name="practice_awareness">\n PRACTICE AWARENESS \n\n USE YOUR SIXTH SENSE \n\n TAKE SELF-DEFENSE TRAINING. \n\n YOU HAVE A RIGHT TO FIGHT
     \n\n SAFEGUARD AGAINST HOME INVASIONS \n\n BE PREPARED WHEN YOU TRAVEL\n\n USE THE INTERNET WISELY</string>
     <string name="vol">VOLUNTEER</string>
@@ -50,6 +50,49 @@
     <string name="rate_myapp">Rate our App</string>
     <string name="home">Home</string>
     <string name="add_contacts">Add contacts</string>
-
-
+    <string name="saved">Saved successfully</string>
+    <string name="delete"><u>delete</u></string>
+    <string name="law1"><b>Sexual Harassment at Workplace Act, 2013</b>\n
+To ensure women’s safety at workplace, this Act seeks to protect them from sexual harassment at their place of work.
+Eve teasing is used to refer to sexual harassment of women in public places
+        The victim can file a complaint with Police under <u>Indian Penal Code 1860</u> under Sections <b>294 354 354A 509</b></string>
+    <string name="law2"><b>Throwing Acid</b>\n
+Acid throwing, also called an acid attack is a form of violent assault defined as the act of throwing acid or a similarly corrosive substance onto the body of another with the intention to disfigure, maim, torture, or kill.
+        <b>Section 326A</b> and <b>Section 326B</b> of the <u>Indian Penal Code, 1860</u> provide the punishment for voluntarily causing grievous hurt by use of acid and voluntary throwing or attempting to throw acid respectively. </string>
+<string name="law3"><b>Section 100</b> of the Indian Penal Code allows the right of private defense to the extent of causing death if there is acid is thrown or there is an attempt of throwing acid.
+</string>
+    <string name="law4"><b>Rape</b>\n The victim can file a complaint with Police under Indian Penal Code 1860 under Sections\n376-Punishment for Rape\n376A-Punishment for causing death or resulting in persistent vegetative stage of victim.\n376B- Sexual Intercourse by Husband upon his wife during separation\n376C- Sexual Intercourse by Person in Authority\n376D-Gang Rape\n</string>
+    <string name="law5"><b>Obscenity and Pornography</b>\n Pornography is printed or visual material containing the explicit description or display of sexual organs or activity, intended to stimulate sexual excitement or seems lewd from a responsible reader standpoint..\nThe victim can file a complaint with Police\nSections 292,293,294,354,354A,354B,354C,509 of the Indian Penal Code, 1860.\nSections 66E, 67,67A, 67B of the Information Technology Act, 2000\nSection 6 of the Indecent Representation of Women (Prohibition) Act, 1986.</string>
+    <string name="law6"><b>Domestic Violence</b>\n Domestic Violence can be described as where one adult in a relationship misuses power in order to control another. It is the establishment of fear in a relationship through violence that includes other forms of abuse. The violence may involve physical abuse, sexual assault and threats.\nThe victim can file a complaint with Police.\n
+        <b>Protection of Women from Domestic Violence Act, 2005.</b></string>
+    <string name="law7"><b>Other laws for women safety</b>\n
+        <i>The Immoral Traffic (Prevention) Act, 1956</i>\n
+        <i>The Dowry Prohibition Act, 1961 (28 of 1961) (Amended in 1986)</i>\n
+        <i>The Indecent Representation of Women (Prohibition) Act, 1986</i> \n
+        <i>The Commission of Sati (Prevention) Act, 1987</i> \n
+        <i>The Criminal Law (Amendment) Act, 2013</i>
+    </string>
+    <string name="tip1"><b> Be aware of your surroundings. Don’t let your guard down</b>\n 1.If things seem even a slight unsafe get out of that place immediately</string>
+    <string name="tip2"> <b>Please trust and make good use of your ‘gut feel’ or ‘intuition’ or ‘sixth sense’ in each and every place and situation.</b>\n1.There will invariably be signs, however small or seemingly insignificant, that tell or alarm you that all is just not OK. You may not understand it or be able to analyze it consciously, but please do NOT ignore it. It is your personal threat alarm beeping\n2.Make it a habit to read and notice these warning signs and go with your intuition to quickly retract yourself, move out or immediately get away from potentially unsafe situations.</string>
+    <string name="tip3"><b> Don’t take eve teasing lightly</b>\n1.Respond with a stern voice\n2.Threaten to take a picture which might scare them away.\n3.If the eve teasing still persists then immediately raise your voice to gather a crowd</string>
+    <string name="tip4"><b> As much as possible avoid late night travel using public transport</b>\n1.If avoiding is not possible then be sure to travel only on crowded bus\n2.Avoid taking road side cabs\n3.Avoid using a bus which has no passenger or few passenger</string>
+    <string name="tip5"> <b>While using 2 wheeler be sure to wear helmet at all times (especially at night)</b>.\nDon’t stop for any stranger\n In case attacked, use your helmet to defend yourself</string>
+    <string name="tip6"><b> While driving a car:</b>\n1.Avoid parking at desolate area.\n2.Look inside the car especially the back seat before unlocking and entering.\n3.Lock the doors immediately after entering the car.\n4.Start the car and drive off rather then call someone. Calls can wait\n5.Don’t give lift to strangers.\n6.Don’t stop your car for strangers, especially at night.\n7.Take known routes, avoid short cuts which you don’t know.</string>
+    <string name="tip7"><b> While travelling at night don’t keep your phone in your hand</b>\n1.Remember phone is the first thing your attacker will throw away.\n2.Activate your speed dials which can be used to dial numbers in emergency.\n3.Keep it in your pocket or at a place from where you can easily take it out and dial a number and leave it on.\n4.Once the number has been dialled start shouting and try to speak out your location so that the other person can inform police about your location.\n5.If you have a smart phone then install emergency apps which can send sms to known people and can even dial police no. in case of emergency.</string>
+    <string name="tip8"><b> After getting dropped don’t stay outside to take a call</b>\n1.Take calls on your phone only when you have entered your home and not outside.</string>
+    <string name="tip9"> <b>If you feel that someone is following you immediately rush to a crowded place and if need to be don’t be embarrassed to shout and gain attention.</b>\n1.Don’t be embarrassed to share such things with your family and friends.</string>
+    <string name="tip10"> <b>In case you are in a sticky situation don’t be afraid to use anything in your hand to defend yourself.</b>\n1.Use keys, bottle even your purse to inflict damage to your attacker.</string>
+    <string name="tip11"><b> Following are the most vulnerable areas to attack:</b>\n1.Use your knees to hit hard between the legs of the attacker.\n2.Using your fingers to poke hard in the eyes.\n3.Hitting front part of the neck on the Adams apple will leave him in a shock.\n4.Punching in the stomach will leave the attacker breathless and unable to chase you.\n5.Hitting hard in the chest area</string>
+    <string name="tip12"> <b>In case you feel you are being stalked or regularly followed, don’t keep it to yourself because what might be on lighter side now might become dangerous if not controlled.</b>\n1.Seek help of friends and family.\n2.If need be approach police immediately.</string>
+    <string name="ins_des"> Smart System for Women Security is an application for the safety of women
+and this application (app) can be activated by single voice command (HELP) or a tap on mic symbol,Either of the actions identifies the app arises and identifies the location of place through GPS and sends a message comprising this
+location URL to the registered contacts and also call on primary contact to help the one in
+dangerous situations.</string>
+    <string name="ins1"> After successful installation.\n1.Add all your emergency numbers in Add contacts section.\n2.Whenever, need arises tap on MIC or scream as HELP!(make sure app runs in background).\n3.If you want to forward a message to all your emergency contacts,go to message section , Enter your a message and click on send.\n4.Go through all the safety tips which makes to more confident to face situations.\n5.Know about the laws and sections for women safety.
+</string>
+    <string name="need">need <b>HELP</b> pick from below location\n</string>
+    <string name="mess">Message from Smart System from Women Security\n</string>
+    <string name="you_can_add_upto_10_contacts">You can add upto 10 Contacts</string>
+    <string name="pick_a_contact_from_contact_list">Pick a contact from contact list</string>
+    <string name="tap_on_mic_or_scream_as_help">Tap on MIC or Scream as HELP!</string>
 </resources>

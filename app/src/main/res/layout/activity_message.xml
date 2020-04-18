@@ -8,6 +8,7 @@
     android:padding="10dp"
     tools:context=".MessageActivity">
 
+
     <EditText
         android:id="@+id/et_MessageActivity"
         android:layout_width="match_parent"
@@ -29,4 +30,11 @@
         android:textStyle="bold"
         android:background="@color/primary"
         android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_message_regCon"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"/>
 </LinearLayout>

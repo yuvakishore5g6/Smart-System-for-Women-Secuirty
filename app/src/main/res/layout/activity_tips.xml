@@ -1,18 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Tips"
-    android:orientation="vertical">
+    >
 
-
+<TextView
+    android:id="@+id/tv_law1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tip1"
+    android:layout_centerHorizontal="true"
+    android:padding="10dp"
+    android:layout_margin="5dp"
+    android:layout_marginTop="3dp"
+    android:background="@drawable/border"
+    android:fontFamily="sans-serif"
+    />
     <TextView
+        android:id="@+id/tv_law2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:text="@string/tip2"
+        android:layout_centerHorizontal="true"
         android:padding="10dp"
-        android:text="@string/practice_awareness"
-        android:fontFamily="sans-serif-black"></TextView>
+        android:layout_below="@id/tv_law1"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip3"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law2"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+    android:id="@+id/tv_law4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tip4"
+    android:layout_centerHorizontal="true"
+    android:padding="10dp"
+    android:layout_below="@id/tv_law3"
+    android:layout_margin="5dp"
+    android:layout_marginTop="3dp"
+    android:background="@drawable/border"
+    android:fontFamily="sans-serif"
+    />
+    <TextView
+        android:id="@+id/tv_law5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip5"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law4"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip6"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law5"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip7"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law6"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip8"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law7"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip9"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law8"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip10"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law9"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip11"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law10"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
+    <TextView
+        android:id="@+id/tv_law12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip12"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_below="@id/tv_law11"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/border"
+        android:fontFamily="sans-serif"
+        />
 
-</LinearLayout>
+</RelativeLayout>
+</ScrollView>

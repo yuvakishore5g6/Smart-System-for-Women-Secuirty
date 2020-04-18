@@ -1,9 +1,10 @@
 package com.example.ss_ws;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,11 +12,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 public class Volunteer extends AppCompatActivity {
 
     TextView raise,ambulance,exit;
     ImageView img;
     private MediaPlayer player;
+    private static final int LOCATION_SETTINGS_REQUEST = 123;
     boolean isPlaying  = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +58,20 @@ public class Volunteer extends AppCompatActivity {
             public void onClick(View v) {
                 if(!isPlaying)
                     alert();
-                else
+                else {
+                    isPlaying = false;
                     player.stop();
+                }
             }
         });
+
     }
 
+
     private void alert() {
-        if(player == null)
-        {
+
+            isPlaying = true;
             player = MediaPlayer.create(this,R.raw.police);
-        }
         player.start();
     }
     @Override
