@@ -34,6 +34,17 @@ public class MessageActivity extends AppCompatActivity {
         textView =findViewById(R.id.tv_message_regCon);
         editText = findViewById(R.id.et_MessageActivity);
         button = findViewById(R.id.but_msg_send);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send();
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+
         SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES,MODE_PRIVATE);
         boolean set = preferences.getBoolean("set",false);
 
@@ -58,44 +69,40 @@ public class MessageActivity extends AppCompatActivity {
             textView.setText(text);
             Toast.makeText(this, "No contacts Selected:Add Contacts", Toast.LENGTH_SHORT).show();
         }
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                send();
-            }
-        });
+        super.onStart();
     }
 
     private void send() {
-        String message  = editText.getText().toString().trim();
-        SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES,MODE_PRIVATE);
-        boolean set = preferences.getBoolean("set",false);
-        if(set)
-        {
-            hSet = (HashSet<String>) preferences.getStringSet("phone_set",Collections.singleton(""));
-        }
+        String message = editText.getText().toString().trim();
+        if (message.length() > 0) {
+            SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
+            boolean set = preferences.getBoolean("set", false);
+            if (set) {
+                hSet = (HashSet<String>) preferences.getStringSet("phone_set", Collections.singleton(""));
+            }
 
-        if(set)
-        {
-            ArrayList<String> al = new ArrayList<>(hSet);
-            int size = al.size();
-            for(int i = 0 ; i < size;i++)
-            {
-                String number = al.get(i);
+            if (set) {
+                ArrayList<String> al = new ArrayList<>(hSet);
+                int size = al.size();
+                for (int i = 0; i < size; i++) {
+                    String number = al.get(i);
+                    SmsManager sms = SmsManager.getDefault();
+                    sms.sendTextMessage(number, null, message, null, null);
+                    Toast.makeText(MessageActivity.this, "Message sent to " + number, Toast.LENGTH_SHORT).show();
+                }
+
+            } else {
                 SmsManager sms = SmsManager.getDefault();
-                sms.sendTextMessage(number, null, message, null, null);
-                Toast.makeText(MessageActivity.this, "Message sent to "+number, Toast.LENGTH_SHORT).show();
+                String number1 = preferences.getString("contact1", "");
+                String number2 = preferences.getString("contact2", "");
+                sms.sendTextMessage(number1, null, message, null, null);
+                sms.sendTextMessage(number2, null, message, null, null);
+                Toast.makeText(MessageActivity.this, "Messages Sent to Primary and secondary contacts", Toast.LENGTH_SHORT).show();
             }
 
         }
-        else{
-            SmsManager sms = SmsManager.getDefault();
-            String number1 = preferences.getString("contact1","");
-            String number2 = preferences.getString("contact2","");
-            sms.sendTextMessage(number1, null, message, null, null);
-            sms.sendTextMessage(number2, null, message, null, null);
-            Toast.makeText(MessageActivity.this,"Messages Sent to Primary and secondary contacts",Toast.LENGTH_SHORT).show();
+        else {
+            Toast.makeText(MessageActivity.this,"Enter a message",Toast.LENGTH_SHORT).show();
         }
-
     }
 }

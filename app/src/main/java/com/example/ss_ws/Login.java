@@ -104,7 +104,7 @@ public class Login extends AppCompatActivity {
                 editor.commit();
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(number, null, "OTP: " + formatted, null, null);
-                Toast.makeText(Login.this, "Opt sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "OTP sent", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Login.this, Verify.class);
                 intent.putExtra("opt", formatted);
                 startActivity(intent);

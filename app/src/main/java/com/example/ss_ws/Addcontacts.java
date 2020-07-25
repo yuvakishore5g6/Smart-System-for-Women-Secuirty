@@ -210,10 +210,7 @@ public class Addcontacts extends AppCompatActivity {
                     Cursor cursor1, cursor2;
                     String TempNameHolder, TempNumberHolder, TempContactID, IDresult = "" ;
                     int IDresultHolder ;
-
                     uri = ResultIntent.getData();
-
-
                     cursor1 = getContentResolver().query(uri, null, null, null, null);
 
                     if (cursor1.moveToFirst()) {
@@ -245,7 +242,6 @@ public class Addcontacts extends AppCompatActivity {
         }
 
     }
-
 
 }
 

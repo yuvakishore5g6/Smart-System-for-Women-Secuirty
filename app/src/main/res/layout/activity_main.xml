@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primary"
-        android:padding="10dp"
+        android:padding="7dp"
         android:layout_gravity="center"
         android:text="@string/help"
         android:textStyle="bold"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed-medium"
         android:layout_gravity="center"
-        android:padding="10dp"
+        android:padding="7dp"
         android:text="@string/smart_system_for_women_security"
         android:textSize="20sp"
         />
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="7dp"
         android:layout_marginTop="5dp"
         android:text="@string/hello_world"
         android:textSize="20sp"
@@ -156,12 +156,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tap_on_mic_or_scream_as_help"
+        android:text="@string/main"
         android:layout_marginTop="3dp"
-        android:textSize="20sp"
+       android:background="@drawable/border"
         android:layout_gravity="center"
-        android:textColor="@color/dark"
-
+        android:textAlignment="center"
+        android:textSize="11sp"
         android:gravity="center"/>
 </LinearLayout>
     <com.google.android.material.navigation.NavigationView

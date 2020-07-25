@@ -1,10 +1,7 @@
 package com.example.ss_ws;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +11,6 @@ import android.widget.TextView;
 
 
 public class Volunteer extends AppCompatActivity {
-
     TextView raise,ambulance,exit;
     ImageView img;
     private MediaPlayer player;
@@ -66,10 +62,7 @@ public class Volunteer extends AppCompatActivity {
         });
 
     }
-
-
     private void alert() {
-
             isPlaying = true;
             player = MediaPlayer.create(this,R.raw.police);
         player.start();

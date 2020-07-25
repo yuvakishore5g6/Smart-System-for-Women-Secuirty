@@ -157,13 +157,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tap_on_mic_or_scream_as_help"
+        android:text="@string/main"
         android:layout_marginTop="3dp"
-        android:textSize="20sp"
+        android:background="@drawable/border"
         android:layout_gravity="center"
-        android:textColor="@color/dark"
-
-        android:gravity="center"/>
+        android:textAlignment="center"
+        android:textSize="11sp"
+        android:gravity="center"
+        />
 
 
 </LinearLayout>

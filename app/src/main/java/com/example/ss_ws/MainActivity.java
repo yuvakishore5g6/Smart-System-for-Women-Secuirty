@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 clickmeforloc();
-                call();
+//                call();
             }
         });
         responseText =findViewById(R.id.responseText);
@@ -150,33 +150,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
                 Username = preferences.getString("userName", "");
                 latitude = location.getLatitude();
-//                String add="";
                 longitude = location.getLongitude();
-//                geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-
-//                try {
-//                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
-//                    String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-//                    String city = addresses.get(0).getLocality();
-//                    String state = addresses.get(0).getAdminArea();
-//                    String country = addresses.get(0).getCountryName();
-//                    String postalCode = addresses.get(0).getPostalCode();
-//                    add = address + "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode;
-//                    Toast.makeText(MainActivity.this,"Loc from GEo",Toast.LENGTH_SHORT).show();
-//
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
                 sms(latitude, longitude, Username);
             }
-
-
-            @Override
+           @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
-
             }
-
             @Override
             public void onProviderEnabled(String s) {
 
@@ -201,8 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
-    private void sms(double latitude, double longitude, String username){
+    private void sms(double latitude, double longitude,String Username){
         SharedPreferences preferences = getSharedPreferences(MY_PREFERENCES,MODE_PRIVATE);
         String number1 = preferences.getString("contact1","");
         String number2 = preferences.getString("contact2","");
@@ -210,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (set) {
             hSet = (HashSet<String>) preferences.getStringSet("phone_set", Collections.singleton(""));
         }
-        String pin = "Message from Smart System for Women Security\n"+"need HELP! pick from below location\n" + "http://maps.google.com/maps?q=" + latitude + "," + longitude;
+        String pin = "Message from Smart System for Women Security\n"+Username+"need HELP! pick from below location\n" + "http://maps.google.com/maps?q=" + latitude + "," + longitude;
 //        String loc1 = pin+"\n"+add;
         String loc1 = pin;
         Iterator it = hSet.iterator();
@@ -234,9 +212,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toast.makeText(MainActivity.this, "Messages sent", Toast.LENGTH_SHORT).show();
 
     }
-
-
-
 
     private boolean checkAndRequestPermission() {
         List<String> listPermissionNeeded = new ArrayList<>();
@@ -330,10 +305,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-
-
-
-
     public void voice() {
         mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.this);
         SpeechListener mRecognitionListener = new SpeechListener();
@@ -411,19 +382,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             if (result_message.contains("hello")){
                 response = "Hello techie nice to meet you...!";
-
             }
         } else if (result_message.contains("help")){
             clickmeforloc();
             call();
             response = "Smart security system is online";
 
-        }
-        else if(result_message.contains("stop"))
-        {
-            mSpeechRecognizer.stopListening();
-            mSpeechRecognizer.cancel();
-            mSpeechRecognizer.destroy();
         }
         else if (result_message.contains("exit")){
             killCommanded = true;
@@ -441,14 +405,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(20 * 1000)
                 .setFastestInterval(1 * 1000);
-
         LocationSettingsRequest.Builder settingsBuilder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
         settingsBuilder.setAlwaysShow(true);
-
         Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(this)
                 .checkLocationSettings(settingsBuilder.build());
-//        Toast.makeText(MainActivity.this,"LOCation"+mLocationRequest,Toast.LENGTH_LONG).show();
         result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
             @Override
             public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
@@ -459,13 +420,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     switch (ex.getStatusCode()) {
                         case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                             try {
-                                ResolvableApiException resolvableApiException =
-                                        (ResolvableApiException) ex;
-                                resolvableApiException
-                                        .startResolutionForResult(MainActivity.this,
-                                                LOCATION_SETTINGS_REQUEST);
+                                ResolvableApiException resolvableApiException = (ResolvableApiException) ex;
+                                resolvableApiException.startResolutionForResult(MainActivity.this, LOCATION_SETTINGS_REQUEST);
                             } catch (IntentSender.SendIntentException e) {
-
                             }
                             break;
                         case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
@@ -489,7 +446,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void clickmeforloc() {
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding

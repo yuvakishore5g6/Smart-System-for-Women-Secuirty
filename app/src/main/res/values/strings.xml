@@ -95,4 +95,5 @@ dangerous situations.</string>
     <string name="you_can_add_upto_10_contacts">You can add upto 10 Contacts</string>
     <string name="pick_a_contact_from_contact_list">Pick a contact from contact list</string>
     <string name="tap_on_mic_or_scream_as_help">Tap on MIC or Scream as HELP!</string>
+    <string name="main"><b>Tap on MIC</b> -> It shares your location to your registered contacts for every one minute.\n <b>Scream as HELP!</b>->It includes Tap on MIC function + Call is connected to your primary contact dynamically(*Required Internet Connection)</string>
 </resources>
